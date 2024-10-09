@@ -151,25 +151,25 @@ below, replace `http://localhost:4567` with where your instance of `chhoto-url` 
 If you have set up
 a password, first do the following to get an authentication cookie and store it in a file.
 ```bash
-curl -X post -d "<your-password>" -c cookie.txt http://localhost:4567/api/login
+curl -X POST -d "<your-password>" -c cookie.txt http://localhost:4567/api/login
 ```
 You should receive "Correct password!" if the provided password was correct. For any subsequent
 request, please add `-b cookie.txt` to provide authentication.
 
 To add a link, do
 ```bash
-curl -X POST -d '{"shortlink":"<shortlink>", "longlink":"<longlink>"}' http://localhost:4567/api/new
+curl -X POST -d '{"shortlink":"<shortlink>", "longlink":"<longlink>"}' http://localhost:4567/api/new -b cookie.txt
 ```
 Send an empty `<shortlink>` if you want it to be auto-generated. The server will reply with the generated shortlink.
 
 To get a list of all the currently available links as `json`, do
 ```bash
-curl http://localhost:4567/api/all
+curl http://localhost:4567/api/all -b cookie.txt
 ```
 
 To delete a link, do
 ```bash
-curl -X DELETE http://localhost:4567/api/del/<shortlink>
+curl -X DELETE http://localhost:4567/api/del/<shortlink> -b cookie.txt
 ```
 The server will send a confirmation.
 
